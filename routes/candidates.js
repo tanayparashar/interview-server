@@ -23,21 +23,43 @@ App.post('/',(req,res)=>{
     });
     candidate.save().then(result => {
         console.log(result);
-    })
-    .catch(err=>console.log(error));
-    res.status(201).json(
+        res.status(201).json(
         {
             message:"candidatae created",
             createdCandidate:candidate
         }
     );
+    })
+    .catch(err=>
+        {
+            console.log(error)
+            res.status(500).json(
+                {
+                    message:"error adding candidates to database"
+                }
+            )
+        });
+    
 });
 
-/*
+
 App.get("/",(req,res)=>{
     //req=JSON.parse(req);
     //console.log(req.body);
-    res.status(200).json({hello:"world"});
+    Candidate.find()
+    .exec()
+    .then( docs =>{
+            console.log(docs);
+            res.status(200).json(docs);
+    })
+    .catch( err => {
+        console.log(error);
+        res.status(500).json(
+            {
+                message:"error retreiving candidates from database"
+            }
+        )
+    })
 });
-*/
+
 module.exports=App;
