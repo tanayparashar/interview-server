@@ -78,7 +78,7 @@ App.post('/',async (req,res)=>{
         })
         .catch(err=>
             {
-                console.log(error)
+                console.log(err);
                 res.status(500).json(
                     {
                         message:"error adding candidates to database"
@@ -88,6 +88,23 @@ App.post('/',async (req,res)=>{
     }
 });
 
+
+App.post('/delete',async (req,res)=>{
+    Candidate.deleteOne({candidateEmail:req.body.candidateEmail,interviewerEmail:req.body.interviewerEmail,startTime:req.body.startTime,endTime:req.body.endTime})
+    .exec()
+    .then(result=>{
+        console.log(result);
+        res.status(200).json(result)
+    })
+    .catch(err=> {
+        console.log(err);
+        res.status(500).json(
+            {
+                error:err
+            }
+        );
+    });
+});
 
 App.get("/",(req,res)=>{
     //req=JSON.parse(req);
