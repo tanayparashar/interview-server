@@ -12,7 +12,9 @@ App.use(bodyParser.json());
 App.options('/', cors());
 App.post('/',async (req,res)=>{
     const flag1=req.body.candidateEmail;
+    const flag2=req.body.interviewerEmail;
     var findarr=[];
+    var findarr1=[];
     var concide=false;
     // Candidate.find({ candidateEmail:flag1 }, function (err, docs) {
     //     if (err){
@@ -25,10 +27,28 @@ App.post('/',async (req,res)=>{
     // });
     let docs =await Candidate.find({ candidateEmail:flag1 })
     findarr=docs;
-    
+    let docs1=await Candidate.find({ interviewerEmail:flag2 })
+    findarr1=docs1;
     // .then( (data) => (findarr=(data)) );
     
     findarr.forEach( (ele)=>{
+        let s=ele.startTime;
+        let e=ele.endTime;
+        console.log(s,e);
+        if(s<=req.body.startTime  && req.body.startTime<=e)
+        {
+            concide=true;
+        }
+        if(s<=req.body.endTime  && req.body.endTime<=e)
+        {
+            concide=true;
+        }
+        if(s>=req.body.startTime  &&  req.body.endTime>=e)
+        {
+            concide=true;
+        }
+    });
+    findarr1.forEach( (ele)=>{
         let s=ele.startTime;
         let e=ele.endTime;
         console.log(s,e);
