@@ -7,10 +7,10 @@ const Candidate= require('./routes/candidates.js');
 // const bodyParser = require('body-parser');
 // App.use(bodyParser.json());
 // App.use(cors());
-mongoose.connect("mongodb+srv://tanayparashar:"+process.env.PASS+"@cluster0.oxcdf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+mongoose.connect("mongodb+srv://tanayparashar:"+"HelloWorld"+"@cluster0.oxcdf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
 
 App.use('/candidates',Candidate);
 
-App.listen(process.env.PORT,()=>{
+App.listen(5000,()=>{
     console.log(process.env.PORT);
 });
