@@ -11,6 +11,6 @@ mongoose.connect("mongodb+srv://tanayparashar:"+process.env.PASS+"@cluster0.oxcd
 
 App.use('/candidates',Candidate);
 
-App.listen(5000,()=>{
+App.listen(process.env.PORT,()=>{
     console.log("5000")
 });
